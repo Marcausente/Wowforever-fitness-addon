@@ -1,14 +1,13 @@
 # Fitness Exercise Forever
 
-Addon para **World of Warcraft Forever** (`Interface: 16001`) que calcula el tiempo de vuelo al subir a un grifo, muestra una barra de progreso en tiempo real y te propone ejercicios variados (sin equipo o con mancuernas) para hacer durante el trayecto.
+Addon para **World of Warcraft Forever** (`Interface: 16001`) que se abre automáticamente cuando te subes a un grifo, muestra una barra de tiempo de vuelo clara con el tiempo restante y te guía con ejercicios precargados (sin equipo o con mancuernas) durante el viaje.
 
 ## Características
 
-- **Barra de tiempo en vivo**: 1.912 rutas integradas de WoW Forever (Alianza y Horda, incluidos puntos propios de Forever), soporte para la ventaja *Viajero frecuente* y aprendizaje automático de rutas nuevas.
-- **HUD interactivo en vuelo**: muestra el ejercicio actual con repeticiones o duración, cuenta atrás para ejercicios por tiempo, botón de **Completado**, **Saltar**, **Cambiar** y toggle rápido de **Mancuernas: SÍ/NO**.
-- **78 ejercicios integrados**: 54 ejercicios sin equipamiento y 24 ejercicios con mancuernas (ningún otro material requerido), repartidos entre tren superior, tren inferior, core, cardio y movilidad.
-- **Bilingüe (Español / English)**: detección automática según el idioma del cliente y cambio manual en cualquier momento.
-- **Ventana completa (`/fef`)**: resumen de estadísticas, librería de ejercicios con filtros y creador de ejercicios personalizados, historial/rutas aprendidas y ajustes.
+- **Apertura automática al volar**: al tomar un grifo se abre directamente la ventana con el temporizador de vuelo en vivo (1.912 rutas integradas de WoW Forever, soporte para *Viajero frecuente* y aprendizaje de rutas nuevas).
+- **Interfaz directa y sencilla**: elige **Sin equipo** o **Sin equipo + Mancuernas**, selecciona la **Dificultad** (*Principiante*, *Intermedio* o *Avanzado*) y al instante aparecen los ejercicios.
+- **78 ejercicios precargados**: 54 sin equipamiento y 24 con mancuernas, con repeticiones o cuenta atrás integrada, botón de **Completado** y **Saltar** para ir cambiando de ejercicio durante todo el vuelo.
+- **Bilingüe (Español / English)**: detección automática del cliente y botón rápido `ES | EN` en la esquina superior.
 
 ## Instalación
 
@@ -20,8 +19,7 @@ Addon para **World of Warcraft Forever** (`Interface: 16001`) que calcula el tie
 
 ## Comandos
 
-- `/fef` o `/fitness` — Abre o cierra la ventana principal.
-- `/fef test [segundos]` — Simula un vuelo de prueba (90s por defecto) para probar y colocar la barra.
-- `/fef dumbbells` — Activa o desactiva los ejercicios con mancuernas.
+- `/fef` o `/fitness` — Abre o cierra la ventana.
+- `/fef test [segundos]` — Simula un vuelo de prueba (90s por defecto).
 - `/fef lang [es|en|auto]` — Cambia entre Español, English o automático.
-- `/fef reset` — Restablece la posición del HUD al centro.
+- `/fef reset` — Centra la ventana en pantalla.

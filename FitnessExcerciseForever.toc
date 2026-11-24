@@ -1,10 +1,10 @@
 ## Interface: 16001
 ## Title: |cff00d4aaFitness Exercise Forever|r
-## Notes: Live flight timer bar and bilingual (ES/EN) workout HUD with bodyweight and dumbbell exercises during gryphon flights.
-## Notes-esES: Barra de tiempo de vuelo en vivo y rutina interactiva de ejercicios (con o sin mancuernas) mientras viajas en grifo.
-## Notes-esMX: Barra de tiempo de vuelo en vivo y rutina interactiva de ejercicios (con o sin mancuernas) mientras viajas en grifo.
+## Notes: Automatically opens during gryphon flights with a clear flight timer bar and preloaded bilingual (ES/EN) exercises (bodyweight or dumbbells).
+## Notes-esES: Se abre automáticamente al subir a un grifo con barra de tiempo de vuelo y ejercicios precargados (sin equipo o con mancuernas).
+## Notes-esMX: Se abre automáticamente al subir a un grifo con barra de tiempo de vuelo y ejercicios precargados (sin equipo o con mancuernas).
 ## Author: FitnessExcerciseForever
-## Version: 1.0.0
+## Version: 1.1.0
 ## SavedVariables: FitnessExcerciseForeverDB
 ## IconTexture: Interface\Icons\Ability_Rogue_Sprint
 ## AddonCompartmentFunc: FitnessExcerciseForever_Compartment
@@ -13,6 +13,5 @@ Locales.lua
 FlightData.lua
 Exercises.lua
 FlightTracker.lua
-FlightHUD.lua
-MainWindow.lua
+FitnessFrame.lua
 Core.lua

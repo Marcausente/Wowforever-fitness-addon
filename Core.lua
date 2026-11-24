@@ -1,24 +1,14 @@
 local addonName, ns = ...
 
 local DEFAULTS = {
+    setupDone = false,
     settings = {
-        language = "auto",        -- "auto", "es", "en"
-        equipmentMode = "none",   -- "none", "mixed", "prefer_dumbbells"
-        difficulty = "all",       -- "all", "beginner", "intermediate", "advanced"
+        language = "auto",      -- "auto", "es", "en"
+        equipmentMode = "none", -- "none" or "mixed"
+        difficulty = "beginner",-- "beginner", "intermediate", "advanced"
         allowFloor = true,
-        autoAdvanceTimed = false,
-        fillBar = true,
-        sounds = true,
-        showMapTooltip = true,
-        autoHideOnLand = true,
-        showMinimap = true,
-        hudScale = 1.0,
     },
     routes = {},
-    stats = {},
-    history = {},
-    disabledExercises = {},
-    customExercises = {},
     recentExercises = {},
     minimapAngle = 210,
 }
@@ -37,8 +27,8 @@ local function ApplyDefaults(target, defaults)
 end
 
 function FitnessExcerciseForever_Compartment()
-    if ns.MainWindow then
-        ns.MainWindow:Toggle()
+    if ns.FitnessFrame then
+        ns.FitnessFrame:Toggle()
     end
 end
 
@@ -52,8 +42,8 @@ local function RegisterSlashCommands()
         cmd = cmd and cmd:lower() or ""
         arg = arg and arg:lower() or ""
 
-        if cmd == "" or cmd == "open" or cmd == "config" then
-            ns.MainWindow:Toggle()
+        if cmd == "" or cmd == "open" or cmd == "toggle" then
+            ns.FitnessFrame:Toggle()
             return
         end
 
@@ -63,25 +53,10 @@ local function RegisterSlashCommands()
             return
         end
 
-        if cmd == "dumbbells" or cmd == "mancuernas" then
-            local s = FitnessExcerciseForeverDB.settings
-            if s.equipmentMode == "none" then
-                s.equipmentMode = "mixed"
-                print("|cff00d4aaFEF:|r " .. ns.T("BTN_DUMBBELLS_ON"))
-            else
-                s.equipmentMode = "none"
-                print("|cff00d4aaFEF:|r " .. ns.T("BTN_DUMBBELLS_OFF"))
-            end
-            ns.MainWindow:Refresh()
-            ns.FlightHUD:RefreshLanguage()
-            return
-        end
-
         if cmd == "lang" or cmd == "idioma" then
             if arg == "es" or arg == "en" or arg == "auto" then
                 FitnessExcerciseForeverDB.settings.language = arg
-                ns.MainWindow:Refresh()
-                ns.FlightHUD:RefreshLanguage()
+                ns.FitnessFrame:RefreshAll()
                 print("|cff00d4aaFEF:|r " .. ns.T("LANG_NAME"))
             else
                 print("|cff00d4aaFEF:|r /fef lang [es|en|auto]")
@@ -90,17 +65,16 @@ local function RegisterSlashCommands()
         end
 
         if cmd == "reset" then
-            ns.FlightHUD:ResetPosition()
+            ns.FitnessFrame:ResetPosition()
             print("|cff00d4aaFEF:|r " .. ns.T("MSG_HUD_RESET"))
             return
         end
 
-        print("|cff00d4aa" .. ns.T("MSG_HELP_HEADER") .. "|r")
+        print("|cff00d4aaFitness Exercise Forever:|r")
         print("  " .. ns.T("MSG_HELP_1"))
         print("  " .. ns.T("MSG_HELP_2"))
         print("  " .. ns.T("MSG_HELP_3"))
         print("  " .. ns.T("MSG_HELP_4"))
-        print("  " .. ns.T("MSG_HELP_5"))
     end
 end
 
@@ -112,7 +86,7 @@ bootFrame:SetScript("OnEvent", function(self, event, loadedAddon)
         ApplyDefaults(FitnessExcerciseForeverDB, DEFAULTS)
 
         ns.FlightTracker:Init()
-        ns.MainWindow:Init()
+        ns.FitnessFrame:Init()
         RegisterSlashCommands()
 
         print(ns.T("LOADED_MSG"))

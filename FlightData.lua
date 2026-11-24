@@ -2132,6 +2132,25 @@ function FlightData:GetContinentID()
     return nil
 end
 
+function FlightData:LookupRoute(faction, continentID, routeKey)
+    if not faction or not routeKey then return nil end
+    local factionData = self:LoadFaction(faction)
+    if not factionData then return nil end
+
+    if continentID and factionData[continentID] and factionData[continentID][routeKey] then
+        return factionData[continentID][routeKey], factionData[continentID]
+    end
+
+    -- Fallback: scan both continents in case subzone mapType didn't resolve to 2
+    for _, cData in pairs(factionData) do
+        if type(cData) == "table" and cData[routeKey] then
+            return cData[routeKey], cData
+        end
+    end
+
+    return nil, continentID and factionData[continentID] or nil
+end
+
 function FlightData:FormatTime(seconds)
     seconds = math.max(0, math.ceil(tonumber(seconds) or 0))
     local mins = math.floor(seconds / 60)
