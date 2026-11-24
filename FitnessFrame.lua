@@ -278,8 +278,9 @@ local function BuildFrame()
 
     -- High-contrast outlined timer text centered on the bar
     local barText = bar:CreateFontString(nil, "OVERLAY")
-    local fontPath = GameFontNormalLarge:GetFont()
+    local fontPath = GameFontNormalLarge and GameFontNormalLarge:GetFont() or "Fonts\\FRIZQT__.TTF"
     barText:SetFont(fontPath, 13, "OUTLINE")
+    barText:SetDrawLayer("OVERLAY", 7)
     barText:SetPoint("CENTER", bar, "CENTER", 0, 0)
     barText:SetTextColor(1, 1, 1)
     f.barText = barText
@@ -558,7 +559,7 @@ local function BuildFrame()
 
     f:Hide()
     mainFrame = f
-    self:ApplyPosition()
+    FitnessFrame:ApplyPosition()
     return f
 end
 
@@ -791,6 +792,7 @@ end
 
 function FitnessFrame:Init()
     BuildFrame()
+    self:RefreshAll()
 
     if Minimap then
         local btn = CreateFrame("Button", "FitnessExcerciseForeverMinimapButton", Minimap)
