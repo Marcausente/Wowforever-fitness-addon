@@ -51,6 +51,9 @@ local strings = {
         UNIT_SECONDS_EACH_SIDE = "%d sec / side",
 
         EX_DONE_COUNT = "Done: %d",
+        GUIDE_SETUP = "Setup:",
+        GUIDE_MOVE = "How to:",
+        GUIDE_TIP = "Tip:",
         EX_TIMER_PREP = "Get ready: %ds",
         EX_TIMER_LEFT = "Time left: %s",
         EX_TIMER_DONE = "Time's up! Click Complete.",
@@ -129,6 +132,9 @@ local strings = {
         UNIT_SECONDS_EACH_SIDE = "%d seg / lado",
 
         EX_DONE_COUNT = "Hechos: %d",
+        GUIDE_SETUP = "Posición:",
+        GUIDE_MOVE = "Cómo hacerlo:",
+        GUIDE_TIP = "Clave:",
         EX_TIMER_PREP = "Prepárate: %ds",
         EX_TIMER_LEFT = "Tiempo: %s",
         EX_TIMER_DONE = "¡Tiempo! Pulsa Completado.",

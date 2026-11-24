@@ -182,7 +182,7 @@ local function BuildFrame()
     if mainFrame then return mainFrame end
 
     local f = CreateFrame("Frame", "FitnessExcerciseForeverFrame", UIParent, "BackdropTemplate")
-    f:SetSize(436, 372)
+    f:SetSize(540, 476)
     f:SetFrameStrata("HIGH")
     f:SetClampedToScreen(true)
     f:SetMovable(true)
@@ -312,7 +312,7 @@ local function BuildFrame()
     eqLabel:SetTextColor(0.75, 0.82, 0.90)
     setupBox.eqLabel = eqLabel
 
-    local eqNoneBtn = MakeOptionPill(setupBox, 132, 22, function()
+    local eqNoneBtn = MakeOptionPill(setupBox, 152, 22, function()
         FitnessExcerciseForeverDB.settings.equipmentMode = "none"
         FitnessFrame:RefreshSetupPills()
         if FitnessExcerciseForeverDB.setupDone then
@@ -322,7 +322,7 @@ local function BuildFrame()
     eqNoneBtn:SetPoint("LEFT", eqLabel, "RIGHT", 6, 0)
     setupBox.eqNoneBtn = eqNoneBtn
 
-    local eqMixBtn = MakeOptionPill(setupBox, 174, 22, function()
+    local eqMixBtn = MakeOptionPill(setupBox, 220, 22, function()
         FitnessExcerciseForeverDB.settings.equipmentMode = "mixed"
         FitnessFrame:RefreshSetupPills()
         if FitnessExcerciseForeverDB.setupDone then
@@ -341,9 +341,9 @@ local function BuildFrame()
     setupBox.diffLabel = diffLabel
 
     local diffDefs = {
-        { id = "beginner", key = "DIFF_BEGINNER", w = 100 },
-        { id = "intermediate", key = "DIFF_INTERMEDIATE", w = 100 },
-        { id = "advanced", key = "DIFF_ADVANCED", w = 100 },
+        { id = "beginner", key = "DIFF_BEGINNER", w = 122 },
+        { id = "intermediate", key = "DIFF_INTERMEDIATE", w = 122 },
+        { id = "advanced", key = "DIFF_ADVANCED", w = 122 },
     }
     setupBox.diffPills = {}
     local dx = 0
@@ -417,26 +417,44 @@ local function BuildFrame()
     doneText:SetTextColor(0.45, 0.92, 0.72)
     exPanel.doneText = doneText
 
+    -- Exercise illustration box (left)
+    local poseBox = CreateFrame("Frame", nil, exPanel, "BackdropTemplate")
+    poseBox:SetSize(134, 134)
+    poseBox:SetPoint("TOPLEFT", eqBadge, "BOTTOMLEFT", 0, -10)
+    poseBox:SetBackdrop({ bgFile = WHITE })
+    poseBox:SetBackdropColor(0.06, 0.08, 0.12, 1)
+    CreateBorder(poseBox, 0.20, 0.75, 0.62, 0.35)
+    exPanel.poseBox = poseBox
+
+    local poseTex = poseBox:CreateTexture(nil, "ARTWORK")
+    poseTex:SetSize(128, 128)
+    poseTex:SetPoint("CENTER", poseBox, "CENTER", 0, 0)
+    poseTex:SetTexture(ns.Exercises.POSE_TEXTURE)
+    exPanel.poseTex = poseTex
+
+    -- Exercise title, target & step-by-step guide (right of illustration)
     local exName = exPanel:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
-    exName:SetPoint("TOPLEFT", eqBadge, "BOTTOMLEFT", 0, -10)
-    exName:SetPoint("RIGHT", exPanel, "RIGHT", -136, 0)
+    exName:SetPoint("TOPLEFT", poseBox, "TOPRIGHT", 12, 2)
+    exName:SetPoint("RIGHT", exPanel, "RIGHT", -12, 0)
     exName:SetJustifyH("LEFT")
-    exName:SetWordWrap(false)
+    exName:SetWordWrap(true)
     exName:SetTextColor(1, 1, 1)
     exPanel.exName = exName
 
-    local exTarget = exPanel:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
-    exTarget:SetPoint("TOPRIGHT", exPanel, "TOPRIGHT", -12, -40)
-    exTarget:SetJustifyH("RIGHT")
+    local exTarget = exPanel:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    exTarget:SetPoint("TOPLEFT", exName, "BOTTOMLEFT", 0, -4)
+    exTarget:SetPoint("RIGHT", exPanel, "RIGHT", -12, 0)
+    exTarget:SetJustifyH("LEFT")
     exTarget:SetTextColor(1, 0.85, 0.35)
     exPanel.exTarget = exTarget
 
     local exDesc = exPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
-    exDesc:SetPoint("TOPLEFT", exName, "BOTTOMLEFT", 0, -8)
-    exDesc:SetPoint("RIGHT", exPanel, "RIGHT", -12, 0)
+    exDesc:SetPoint("TOPLEFT", exTarget, "BOTTOMLEFT", 0, -8)
+    exDesc:SetPoint("BOTTOMRIGHT", exPanel, "BOTTOMRIGHT", -12, 46)
     exDesc:SetJustifyH("LEFT")
     exDesc:SetJustifyV("TOP")
-    exDesc:SetTextColor(0.80, 0.84, 0.90)
+    exDesc:SetSpacing(3)
+    exDesc:SetTextColor(0.86, 0.90, 0.94)
     exPanel.exDesc = exDesc
 
     -- Timed exercise sub-bar
@@ -467,7 +485,7 @@ local function BuildFrame()
     exPanel.nextUpText = nextUpText
 
     -- Bottom Action Buttons (Complete / Skip)
-    local completeBtn = MakeButton(f, 200, 30, 0.06, 0.56, 0.40)
+    local completeBtn = MakeButton(f, 250, 32, 0.06, 0.56, 0.40)
     completeBtn:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 14, 12)
     completeBtn.label:SetFontObject("GameFontNormal")
     completeBtn:SetScript("OnClick", function()
@@ -478,7 +496,7 @@ local function BuildFrame()
     end)
     f.completeBtn = completeBtn
 
-    local skipBtn = MakeButton(f, 200, 30, 0.24, 0.28, 0.36)
+    local skipBtn = MakeButton(f, 250, 32, 0.24, 0.28, 0.36)
     skipBtn:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -14, 12)
     skipBtn.label:SetFontObject("GameFontNormal")
     skipBtn:SetScript("OnClick", function()
@@ -667,6 +685,7 @@ function FitnessFrame:RenderExerciseArea()
     local ex = session.currentExercise
     if not ex then
         ep.eqBadge:Hide()
+        ep.poseBox:Hide()
         ep.catText:SetText("")
         ep.exTarget:SetText("")
         ep.exBar:Hide()
@@ -691,8 +710,13 @@ function FitnessFrame:RenderExerciseArea()
     mainFrame.completeBtn:Enable()
     mainFrame.skipBtn:Enable()
 
-    local name, desc = ns.Exercises:GetLocalized(ex)
+    local name = ns.Exercises:GetLocalized(ex)
+    local guideText = ns.Exercises:GetDetailedGuide(ex)
     local target = ns.Exercises:FormatPrescription(ex)
+
+    ep.poseBox:Show()
+    local l, r, t, b = ns.Exercises:GetPoseTexCoords(ex)
+    ep.poseTex:SetTexCoord(l, r, t, b)
 
     ep.eqBadge:Show()
     if ex.equipment == "dumbbells" then
@@ -706,7 +730,7 @@ function FitnessFrame:RenderExerciseArea()
     ep.catText:SetText(ns.T("CAT_" .. string.upper(ex.category or "UPPER")))
     ep.exName:SetText(name)
     ep.exTarget:SetText(target)
-    ep.exDesc:SetText(desc)
+    ep.exDesc:SetText(guideText)
 
     if session.exTimerTotal > 0 then
         ep.exBar:SetStatusBarColor(0.95, 0.72, 0.20, 1)
