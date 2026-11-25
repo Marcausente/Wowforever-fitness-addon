@@ -211,10 +211,10 @@ local function BuildFrame()
 
     -- Header icon + title
     local icon = f:CreateTexture(nil, "ARTWORK")
-    icon:SetSize(24, 24)
-    icon:SetPoint("TOPLEFT", f, "TOPLEFT", 14, -12)
-    icon:SetTexture("Interface\\Icons\\Ability_Rogue_Sprint")
-    icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+    icon:SetSize(26, 26)
+    icon:SetPoint("TOPLEFT", f, "TOPLEFT", 14, -11)
+    icon:SetTexture("Interface\\AddOns\\FitnessExcerciseForever\\Media\\Logo")
+    icon:SetTexCoord(0, 1, 0, 1)
 
     local title = f:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     title:SetPoint("LEFT", icon, "RIGHT", 8, 0)
@@ -833,8 +833,8 @@ function FitnessFrame:Init()
         btn:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
 
         local icon = btn:CreateTexture(nil, "ARTWORK")
-        icon:SetTexture("Interface\\Icons\\Ability_Rogue_Sprint")
-        icon:SetSize(20, 20)
+        icon:SetTexture("Interface\\AddOns\\FitnessExcerciseForever\\Media\\Logo")
+        icon:SetSize(22, 22)
         icon:SetPoint("CENTER")
 
         local border = btn:CreateTexture(nil, "OVERLAY")

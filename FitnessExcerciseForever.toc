@@ -4,7 +4,7 @@
 ## Author: FitnessExcerciseForever
 ## Version: 1.2.0
 ## SavedVariables: FitnessExcerciseForeverDB
-## IconTexture: Interface\Icons\Ability_Rogue_Sprint
+## IconTexture: Interface\AddOns\FitnessExcerciseForever\Media\Logo
 ## AddonCompartmentFunc: FitnessExcerciseForever_Compartment
 
 Locales.lua
