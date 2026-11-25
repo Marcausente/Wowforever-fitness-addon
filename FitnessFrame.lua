@@ -541,7 +541,9 @@ local function BuildFrame()
                 end
                 if fl.nextStopIndex and fl.stopNames[fl.nextStopIndex] then
                     local stopRem = math.max(0, fl.stopTimes[fl.nextStopIndex] - flown)
-                    f.nextStopText:SetText(ns.T("FLIGHT_NEXT_STOP", fl.stopNames[fl.nextStopIndex], ns.FlightData:FormatTime(stopRem)))
+                    local stopCoord = fl.stopCoords and fl.stopCoords[fl.nextStopIndex]
+                    local stopLabel = ns.FlightData:TranslateNodeName(stopCoord, fl.stopNames[fl.nextStopIndex], fl.continentID)
+                    f.nextStopText:SetText(ns.T("FLIGHT_NEXT_STOP", stopLabel, ns.FlightData:FormatTime(stopRem)))
                 else
                     f.nextStopText:SetText("")
                 end
@@ -627,9 +629,12 @@ function FitnessFrame:RefreshBarHeader()
 
     if session.inFlight and session.flight then
         local fl = session.flight
+        session.lastSecond = -1
         mainFrame.testBtn:Hide()
         mainFrame.sourceBadge:Show()
-        mainFrame.routeText:SetText((fl.originName or "?") .. "  ->  " .. (fl.destName or "?"))
+        local originLabel = ns.FlightData:TranslateNodeName(fl.originCoord, fl.originName, fl.continentID)
+        local destLabel = ns.FlightData:TranslateNodeName(fl.destCoord, fl.destName, fl.continentID)
+        mainFrame.routeText:SetText(originLabel .. "  ->  " .. destLabel)
         if fl.isTest then
             mainFrame.sourceBadge:SetText("[" .. ns.T("BADGE_TEST") .. "]")
         elseif fl.source == "distance" or fl.source == "unknown" then

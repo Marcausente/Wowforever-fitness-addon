@@ -1,10 +1,8 @@
 ## Interface: 16001
 ## Title: |cff00d4aaFitness Exercise Forever|r
-## Notes: Automatically opens during gryphon flights with a clear flight timer bar and preloaded bilingual (ES/EN) exercises (bodyweight or dumbbells).
-## Notes-esES: Se abre automáticamente al subir a un grifo con barra de tiempo de vuelo y ejercicios precargados (sin equipo o con mancuernas).
-## Notes-esMX: Se abre automáticamente al subir a un grifo con barra de tiempo de vuelo y ejercicios precargados (sin equipo o con mancuernas).
+## Notes: Automatically opens during gryphon flights with a clear flight timer bar and preloaded exercises (bodyweight or dumbbells) with visual pose guides.
 ## Author: FitnessExcerciseForever
-## Version: 1.1.0
+## Version: 1.2.0
 ## SavedVariables: FitnessExcerciseForeverDB
 ## IconTexture: Interface\Icons\Ability_Rogue_Sprint
 ## AddonCompartmentFunc: FitnessExcerciseForever_Compartment

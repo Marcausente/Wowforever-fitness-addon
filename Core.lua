@@ -2,8 +2,9 @@ local addonName, ns = ...
 
 local DEFAULTS = {
     setupDone = false,
+    langDefaultV2 = true,
     settings = {
-        language = "auto",      -- "auto", "es", "en"
+        language = "en",        -- "en" (default) or "es"
         equipmentMode = "none", -- "none" or "mixed"
         difficulty = "beginner",-- "beginner", "intermediate", "advanced"
         allowFloor = true,
@@ -83,7 +84,14 @@ bootFrame:RegisterEvent("ADDON_LOADED")
 bootFrame:SetScript("OnEvent", function(self, event, loadedAddon)
     if event == "ADDON_LOADED" and loadedAddon == addonName then
         FitnessExcerciseForeverDB = FitnessExcerciseForeverDB or {}
+        local isExistingAuto = not FitnessExcerciseForeverDB.langDefaultV2
+            and FitnessExcerciseForeverDB.settings
+            and FitnessExcerciseForeverDB.settings.language == "auto"
         ApplyDefaults(FitnessExcerciseForeverDB, DEFAULTS)
+        if isExistingAuto then
+            FitnessExcerciseForeverDB.settings.language = "en"
+        end
+        FitnessExcerciseForeverDB.langDefaultV2 = true
 
         ns.FlightTracker:Init()
         ns.FitnessFrame:Init()

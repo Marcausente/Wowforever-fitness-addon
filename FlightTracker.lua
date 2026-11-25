@@ -212,7 +212,12 @@ local function ComputeStops(faction, continentID, continentData, totalSeconds, r
         stopNames[i - 1] = route.names[i]
     end
 
-    return stopNames, stopTimes
+    local stopCoords = {}
+    for i = 2, last - 1 do
+        stopCoords[i - 1] = route.keys[i]
+    end
+
+    return stopNames, stopTimes, stopCoords
 end
 
 function FlightTracker:BeginFlight(info)
@@ -225,10 +230,14 @@ function FlightTracker:BeginFlight(info)
     state.baseSeconds = tonumber(info.baseSeconds) or state.totalSeconds
     state.frequentFlier = info.frequentFlier and true or false
     state.source = info.source or "database"
+    state.continentID = info.continentID
+    state.originCoord = info.originCoord
+    state.destCoord = info.destCoord
     state.originName = info.originName or GetZoneText() or "?"
     state.destName = info.destName or "..."
     state.routeKey = info.routeKey
     state.stopNames = info.stopNames or {}
+    state.stopCoords = info.stopCoords or {}
     state.stopTimes = info.stopTimes or {}
     state.nextStopIndex = state.stopTimes[1] and 1 or nil
     state.earlyLanding = false
@@ -265,15 +274,13 @@ end
 
 function FlightTracker:StartTestFlight(seconds)
     seconds = math.max(15, math.min(1800, tonumber(seconds) or 90))
-    local lang = ns.GetLang()
-    local origin = (lang == "es") and "Ventormenta" or "Stormwind"
-    local stop = (lang == "es") and "Colina del Centinela" or "Sentinel Hill"
-    local dest = (lang == "es") and "Bahía del Botín" or "Booty Bay"
 
     local stopTimes = {}
     local stopNames = {}
+    local stopCoords = {}
     if seconds >= 60 then
-        stopNames[1] = stop
+        stopNames[1] = "Sentinel Hill"
+        stopCoords[1] = "0.41:0.75"
         stopTimes[1] = math.floor(seconds * 0.45)
     end
 
@@ -283,10 +290,14 @@ function FlightTracker:StartTestFlight(seconds)
         baseSeconds = seconds,
         frequentFlier = false,
         source = "test",
-        originName = origin,
-        destName = dest,
+        continentID = 1415,
+        originCoord = "0.43:0.67",
+        destCoord = "0.43:0.93",
+        originName = "Stormwind",
+        destName = "Booty Bay",
         routeKey = nil,
         stopNames = stopNames,
+        stopCoords = stopCoords,
         stopTimes = stopTimes,
     })
 end
@@ -354,7 +365,7 @@ function FlightTracker:Init()
             local baseSeconds, source, continentData = EstimateRouteDuration(faction, continentID, route)
             local ff = ns.FlightData:HasFrequentFlier()
             local totalSeconds = ff and (baseSeconds / ns.FlightData.FREQUENT_FLIER_SPEED) or baseSeconds
-            local stopNames, stopTimes = ComputeStops(faction, continentID, continentData, totalSeconds, route, ff)
+            local stopNames, stopTimes, stopCoords = ComputeStops(faction, continentID, continentData, totalSeconds, route, ff)
 
             state.pending = {
                 clickedAt = GetTime(),
@@ -362,10 +373,14 @@ function FlightTracker:Init()
                 baseSeconds = baseSeconds,
                 frequentFlier = ff,
                 source = source,
+                continentID = continentID,
+                originCoord = route.keys[1],
+                destCoord = route.destKey,
                 originName = route.originName,
                 destName = route.destName,
                 routeKey = route.routeKey,
                 stopNames = stopNames,
+                stopCoords = stopCoords,
                 stopTimes = stopTimes,
             }
 
@@ -395,9 +410,11 @@ function FlightTracker:Init()
                 state.earlyLanding = true
                 state.totalSeconds = state.stopTimes[nextIdx]
                 state.destName = state.stopNames[nextIdx] or state.destName
+                state.destCoord = state.stopCoords[nextIdx] or state.destCoord
                 for i = #state.stopTimes, nextIdx, -1 do
                     state.stopTimes[i] = nil
                     state.stopNames[i] = nil
+                    state.stopCoords[i] = nil
                 end
                 state.nextStopIndex = nil
                 if ns.FitnessFrame and ns.FitnessFrame.RefreshBarHeader then

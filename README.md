@@ -1,25 +1,25 @@
 # Fitness Exercise Forever
 
-Addon para **World of Warcraft Forever** (`Interface: 16001`) que se abre automáticamente cuando te subes a un grifo, muestra una barra de tiempo de vuelo clara con el tiempo restante y te guía con ejercicios precargados (sin equipo o con mancuernas) durante el viaje.
+An addon for **World of Warcraft Forever** (`Interface: 16001`) that automatically opens when you mount a gryphon/flight path, displays a clear live flight countdown bar, and guides you through preloaded exercises (bodyweight or dumbbells) with visual pose illustrations and step-by-step instructions.
 
-## Características
+## Features
 
-- **Apertura automática al volar**: al tomar un grifo se abre directamente la ventana con el temporizador de vuelo en vivo (1.912 rutas integradas de WoW Forever, soporte para *Viajero frecuente* y aprendizaje de rutas nuevas).
-- **Interfaz directa y sencilla**: elige **Sin equipo** o **Sin equipo + Mancuernas**, selecciona la **Dificultad** (*Principiante*, *Intermedio* o *Avanzado*) y al instante aparecen los ejercicios.
-- **78 ejercicios precargados**: 54 sin equipamiento y 24 con mancuernas, con repeticiones o cuenta atrás integrada, botón de **Completado** y **Saltar** para ir cambiando de ejercicio durante todo el vuelo.
-- **Bilingüe (Español / English)**: detección automática del cliente y botón rápido `ES | EN` en la esquina superior.
+- **Auto-opens on flight**: Automatically opens on takeoff with a live countdown bar powered by 1,912 built-in WoW Forever routes (including Forever custom flight points and *Frequent Flier* 20% speed support) plus automatic learning for new routes.
+- **Simple, intuitive UI**: Choose **No Equipment** or **No Equip + Dumbbells** and your **Difficulty** (*Beginner*, *Intermediate*, or *Advanced*) to immediately start getting exercises.
+- **78 preloaded exercises**: 54 bodyweight and 24 dumbbell exercises with reps or built-in countdown timers, **Complete** and **Skip** buttons, custom pose illustrations, and clear Setup / How to / Tip instructions.
+- **English & Spanish support**: Defaults to English; switch anytime between English and Español with the `EN | ES` button or `/fef lang es` (including automatic translation of flight point names).
 
-## Instalación
+## Installation
 
-1. Descarga o clona este repositorio dentro de tu carpeta de AddOns como `FitnessExcerciseForever`:
+1. Download or clone this repository into your AddOns folder as `FitnessExcerciseForever`:
    ```
    World of Warcraft\_forever_\Interface\AddOns\FitnessExcerciseForever
    ```
-2. Reinicia el juego o ejecuta `/reload`.
+2. Restart the game client.
 
-## Comandos
+## Commands
 
-- `/fef` o `/fitness` — Abre o cierra la ventana.
-- `/fef test [segundos]` — Simula un vuelo de prueba (90s por defecto).
-- `/fef lang [es|en|auto]` — Cambia entre Español, English o automático.
-- `/fef reset` — Centra la ventana en pantalla.
+- `/fef` or `/fitness` — Open or close the window.
+- `/fef test [seconds]` — Simulate a flight to preview the timer and exercises (default 90s).
+- `/fef lang [en|es]` — Switch between English and Español.
+- `/fef reset` — Reset window position to center.

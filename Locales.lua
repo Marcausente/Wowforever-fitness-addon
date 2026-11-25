@@ -171,13 +171,15 @@ function ns.GetLang()
     local pref = FitnessExcerciseForeverDB
         and FitnessExcerciseForeverDB.settings
         and FitnessExcerciseForeverDB.settings.language
-        or "auto"
+        or "en"
     if pref == "es" or pref == "en" then
         return pref
     end
-    local clientLocale = GetLocale and GetLocale() or "enUS"
-    if clientLocale == "esES" or clientLocale == "esMX" then
-        return "es"
+    if pref == "auto" then
+        local clientLocale = GetLocale and GetLocale() or "enUS"
+        if clientLocale == "esES" or clientLocale == "esMX" then
+            return "es"
+        end
     end
     return "en"
 end

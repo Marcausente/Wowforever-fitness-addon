@@ -2151,6 +2151,119 @@ function FlightData:LookupRoute(faction, continentID, routeKey)
     return nil, continentID and factionData[continentID] or nil
 end
 
+FlightData.NODE_NAMES_BY_COORD = {
+    -- Kalimdor (1414)
+    ["1414:0.31:0.69"] = { en = "Feathermoon", es = "Plumaluna" },
+    ["1414:0.32:0.58"] = { en = "Shadowprey Village", es = "Aldea Cazasombras" },
+    ["1414:0.39:0.40"] = { en = "Stonetalon Peak", es = "Cima del Espolón" },
+    ["1414:0.40:0.51"] = { en = "Nijel's Point", es = "Punta de Nijel" },
+    ["1414:0.41:0.37"] = { en = "Zoram'gar Outpost", es = "Avanzada de Zoram'gar" },
+    ["1414:0.41:0.47"] = { en = "Sun Rock Retreat", es = "Refugio Roca del Sol" },
+    ["1414:0.42:0.16"] = { en = "Rut'theran Village", es = "Aldea Rut'theran" },
+    ["1414:0.42:0.79"] = { en = "Cenarion Hold", es = "Fuerte Cenarion" },
+    ["1414:0.43:0.25"] = { en = "Auberdine", es = "Auberdine" },
+    ["1414:0.44:0.69"] = { en = "Camp Mojache", es = "Campamento Mojache" },
+    ["1414:0.45:0.56"] = { en = "Thunder Bluff", es = "Cima del Trueno" },
+    ["1414:0.46:0.30"] = { en = "Bloodvenom Post", es = "Puesto del Veneno" },
+    ["1414:0.46:0.40"] = { en = "Astranaar", es = "Astranaar" },
+    ["1414:0.48:0.70"] = { en = "Thalanaar", es = "Thalanaar" },
+    ["1414:0.50:0.76"] = { en = "Marshal's Refuge", es = "Refugio de Marshal" },
+    ["1414:0.53:0.26"] = { en = "Talonbranch Glade", es = "Claro Ramaespolón" },
+    ["1414:0.53:0.61"] = { en = "Camp Taurajo", es = "Campamento Taurajo" },
+    ["1414:0.54:0.21"] = { en = "Moonglade", es = "Claro de la Luna" },
+    ["1414:0.55:0.21"] = { en = "Moonglade", es = "Claro de la Luna" },
+    ["1414:0.55:0.42"] = { en = "Splintertree Post", es = "Puesto del Hachazo" },
+    ["1414:0.55:0.73"] = { en = "Freewind Post", es = "Poblado Viento Libre" },
+    ["1414:0.56:0.53"] = { en = "Crossroads", es = "El Cruce" },
+    ["1414:0.57:0.33"] = { en = "Tainted Foothills", es = "Laderas Máculas" },
+    ["1414:0.57:0.64"] = { en = "Brackenwall Village", es = "Poblado Murohelecho" },
+    ["1414:0.59:0.30"] = { en = "Summit of Eternity", es = "Cima de la Eternidad" },
+    ["1414:0.60:0.81"] = { en = "Gadgetzan", es = "Gadgetzan" },
+    ["1414:0.61:0.40"] = { en = "Talrendis Point", es = "Punta Talrendis" },
+    ["1414:0.61:0.55"] = { en = "Ratchet", es = "Trinquete" },
+    ["1414:0.61:0.80"] = { en = "Gadgetzan", es = "Gadgetzan" },
+    ["1414:0.63:0.36"] = { en = "Valormok", es = "Valormok" },
+    ["1414:0.63:0.44"] = { en = "Orgrimmar", es = "Orgrimmar" },
+    ["1414:0.64:0.23"] = { en = "Everlook", es = "Vista Eterna" },
+    ["1414:0.64:0.67"] = { en = "Theramore", es = "Theramore" },
+    ["1414:0.65:0.23"] = { en = "Everlook", es = "Vista Eterna" },
+
+    -- Eastern Kingdoms (1415)
+    ["1415:0.38:0.24"] = { en = "The Sepulcher", es = "El Sepulcro" },
+    ["1415:0.41:0.75"] = { en = "Sentinel Hill", es = "Colina del Centinela" },
+    ["1415:0.43:0.67"] = { en = "Stormwind", es = "Ventormenta" },
+    ["1415:0.43:0.93"] = { en = "Booty Bay", es = "Bahía del Botín" },
+    ["1415:0.44:0.19"] = { en = "Undercity", es = "Entrañas" },
+    ["1415:0.45:0.84"] = { en = "Grom'gol", es = "Grom'gol" },
+    ["1415:0.48:0.30"] = { en = "Southshore", es = "Costasur" },
+    ["1415:0.49:0.27"] = { en = "Tarren Mill", es = "Molino Tarren" },
+    ["1415:0.49:0.44"] = { en = "Menethil Harbor", es = "Puerto de Menethil" },
+    ["1415:0.51:0.49"] = { en = "Ironforge", es = "Forjaz" },
+    ["1415:0.51:0.57"] = { en = "Thorium Point", es = "Puesto del Torio" },
+    ["1415:0.51:0.75"] = { en = "Darkshire", es = "Villa Oscura" },
+    ["1415:0.52:0.22"] = { en = "Chillwind Camp", es = "Campamento del Orvallo" },
+    ["1415:0.55:0.25"] = { en = "Aerie Peak", es = "Pico Nidal" },
+    ["1415:0.55:0.57"] = { en = "Kargath", es = "Kargath" },
+    ["1415:0.56:0.61"] = { en = "Flame Crest", es = "Peñasco Llamarada" },
+    ["1415:0.56:0.70"] = { en = "Lakeshire", es = "Villa del Lago" },
+    ["1415:0.57:0.32"] = { en = "Refuge Pointe", es = "Refugio de la Zaga" },
+    ["1415:0.58:0.65"] = { en = "Morgan's Vigil", es = "Vigilia de Morgan" },
+    ["1415:0.59:0.52"] = { en = "Thelsamar", es = "Thelsamar" },
+    ["1415:0.61:0.75"] = { en = "Stonard", es = "Rocal" },
+    ["1415:0.61:0.78"] = { en = "Nethergarde Keep", es = "Castillo de Nethergarde" },
+    ["1415:0.62:0.31"] = { en = "Hammerfall", es = "Sentencia" },
+    ["1415:0.67:0.30"] = { en = "Revantusk Village", es = "Poblado Sañadiente" },
+    ["1415:0.67:0.63"] = { en = "Rog'mar", es = "Rog'mar" },
+    ["1415:0.68:0.68"] = { en = "Farholde Keep", es = "Castillo de Farholde" },
+    ["1415:0.70:0.16"] = { en = "Light's Hope Chapel", es = "Capilla de la Esperanza de la Luz" },
+}
+
+-- Build coordinate-only and alias lookups once
+FlightData.NODE_NAMES_BY_XY = {}
+FlightData.NODE_NAMES_BY_ALIAS = {}
+for fullKey, entry in pairs(FlightData.NODE_NAMES_BY_COORD) do
+    local xy = fullKey:match("^%d+:(.+)$")
+    if xy and not FlightData.NODE_NAMES_BY_XY[xy] then
+        FlightData.NODE_NAMES_BY_XY[xy] = entry
+    end
+    if entry.en then
+        FlightData.NODE_NAMES_BY_ALIAS[entry.en:lower()] = entry
+    end
+    if entry.es then
+        FlightData.NODE_NAMES_BY_ALIAS[entry.es:lower()] = entry
+    end
+end
+
+-- Extra Classic/client spelling variants
+FlightData.NODE_NAMES_BY_ALIAS["puesto del thorium"] = { en = "Thorium Point", es = "Puesto del Torio" }
+FlightData.NODE_NAMES_BY_ALIAS["bastión plumaluna"] = { en = "Feathermoon", es = "Plumaluna" }
+FlightData.NODE_NAMES_BY_ALIAS["feathermoon stronghold"] = { en = "Feathermoon", es = "Plumaluna" }
+FlightData.NODE_NAMES_BY_ALIAS["the crossroads"] = { en = "Crossroads", es = "El Cruce" }
+FlightData.NODE_NAMES_BY_ALIAS["campamento grom'gol"] = { en = "Grom'gol", es = "Grom'gol" }
+FlightData.NODE_NAMES_BY_ALIAS["grom'gol base camp"] = { en = "Grom'gol", es = "Grom'gol" }
+FlightData.NODE_NAMES_BY_ALIAS["fortaleza de farholde"] = { en = "Farholde Keep", es = "Castillo de Farholde" }
+FlightData.NODE_NAMES_BY_ALIAS["laderas maculadas"] = { en = "Tainted Foothills", es = "Laderas Máculas" }
+FlightData.NODE_NAMES_BY_ALIAS["isla theramore"] = { en = "Theramore", es = "Theramore" }
+FlightData.NODE_NAMES_BY_ALIAS["el bastion"] = { en = "Feathermoon", es = "Plumaluna" }
+
+function FlightData:TranslateNodeName(coordKey, rawName, continentID)
+    local lang = ns.GetLang and ns.GetLang() or "en"
+    local entry = nil
+    if continentID and coordKey then
+        entry = self.NODE_NAMES_BY_COORD[tostring(continentID) .. ":" .. coordKey]
+    end
+    if not entry and coordKey then
+        entry = self.NODE_NAMES_BY_XY[coordKey]
+    end
+    if not entry and type(rawName) == "string" and rawName ~= "" then
+        entry = self.NODE_NAMES_BY_ALIAS[rawName:lower()]
+    end
+    if entry and entry[lang] then
+        return entry[lang]
+    end
+    return rawName or "?"
+end
+
 function FlightData:FormatTime(seconds)
     seconds = math.max(0, math.ceil(tonumber(seconds) or 0))
     local mins = math.floor(seconds / 60)
